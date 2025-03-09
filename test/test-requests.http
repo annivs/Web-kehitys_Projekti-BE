@@ -20,19 +20,6 @@ content-type: application/json
   "email": "xx@example.com"
 }
 
-### modify an existing user by id
-PUT http://localhost:3000/api/users/3
-content-type: application/json
-
-{
-  "username": "editedname",
-  "password": "editedpasswordx",
-  "email": "editedmail@example.com"
-}
-
-### delete a user (by id)
-DELETE http://localhost:3000/api/users/3
-
 ### user login
 POST http://localhost:3000/api/auth/login
 content-type: application/json
@@ -63,4 +50,8 @@ content-type: application/json
 
 ### Get user's entries
 GET http://localhost:3000/api/entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMiwidXNlcm5hbWUiOiJuZXd1c2VybmFtZTIiLCJwYXNzd29yZCI6IiQyYSQxMCRNZVpETzZ4ckpIVFNncnVrZ1ZtR2wuaFRLVUp1NjUwc1c1MlNoOHhRcjhHTlJuUlV1N1FXQyIsImVtYWlsIjoibmV3ZW1haWwyQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMTNUMTE6NDg6NTIuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwNjU1ODA4LCJleHAiOjE3NDA3NDIyMDh9.VdHENb37OV-5CuCTxCdY22BdBpSL90XrNpxM0N-Vh4c
+
+### delete entry
+DELETE http://localhost:3000/api/entries/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMiwidXNlcm5hbWUiOiJuZXd1c2VybmFtZTIiLCJwYXNzd29yZCI6IiQyYSQxMCRNZVpETzZ4ckpIVFNncnVrZ1ZtR2wuaFRLVUp1NjUwc1c1MlNoOHhRcjhHTlJuUlV1N1FXQyIsImVtYWlsIjoibmV3ZW1haWwyQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMTNUMTE6NDg6NTIuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwNjU1ODA4LCJleHAiOjE3NDA3NDIyMDh9.VdHENb37OV-5CuCTxCdY22BdBpSL90XrNpxM0N-Vh4c

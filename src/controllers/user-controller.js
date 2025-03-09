@@ -32,7 +32,6 @@ const getUserById = async (req, res, next) => {
 };
 
 // käyttäjän lisäys (rekisteröinti)
-// lisätään parempi virheenkäsittely myöhemmin
 const addUser = async (req, res, next) => {
   console.log('addUser request body', req.body);
   // esitellään 3 uutta muuttujaa, johon sijoitetaan req.body:n vastaavien propertyjen arvot
@@ -55,33 +54,5 @@ const addUser = async (req, res, next) => {
   }
 };
 
-// Userin muokkaus id:n perusteella 
-const editUser = (req, res) => {
-  console.log('editUser request body', req.body);
-  const user = users.find((user) => user.id == req.params.id);
-  if (user) {
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.email = req.body.email;
-    res.json({message: 'User updated.'});
-  } else {
-    res.status(404).json({message: 'User not found'});
-  }
-};
 
-// Userin poisto id:n perusteella 
-const deleteUser = (req, res) => {
-  console.log('deleteUser', req.params.id);
-  const index = users.findIndex((user) => user.id == req.params.id);
-  //console.log('index', index);
-  // findIndex returns -1 if user is not found
-  if (index !== -1) {
-    // remove one user from array based on index
-    users.splice(index, 1);
-    res.json({message: 'User deleted.'});
-  } else {
-    res.status(404).json({message: 'User not found'});
-  }
-};
-
-export {getUsers, getUserById, addUser, editUser, deleteUser};
+export {getUsers, getUserById, addUser};

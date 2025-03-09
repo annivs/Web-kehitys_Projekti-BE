@@ -13,7 +13,7 @@ const port = 3000;
 app.use(cors());
 
 // Staattinen html-sivusto tarjoillaan palvelimen juuressa
-app.use('/', express.static('public'));
+app.use('/docs', express.static('docs'));
 // middleware, joka lukee json data POST-pyyntöjen rungosta (body)
 app.use(express.json());
 

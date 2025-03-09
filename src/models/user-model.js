@@ -14,8 +14,6 @@ const selectAllUsers = async () => {
 
 /**
  * Fetch user by id
- * using prepared statement (recommended way)
- * example of error handling
  * @param {number} userId id of the user
  * @returns {object} user found or undefined if not
  */
@@ -55,27 +53,6 @@ const insertUser = async (user) => {
 };
 
 /**
- * UNSAFE login for clear text passwords
- * @param {*} username
- * @param {*} password
- * @returns
- */
-const selectUserByNameAndPassword = async (username, password) => {
-  try {
-    const [rows] = await promisePool.query(
-      'SELECT user_id, username, email, created_at, user_level FROM Users WHERE username=? AND password=?',
-      [username, password],
-    );
-    console.log(rows);
-    // return only first item of the result array
-    return rows[0];
-  } catch (error) {
-    console.error(error);
-    throw new Error('database error');
-  }
-};
-
-/**
  * Fetch all user data based on user's username
  * @param {*} username
  * @returns {object} user data
@@ -99,6 +76,5 @@ export {
   selectAllUsers,
   selectUserById,
   insertUser,
-  selectUserByNameAndPassword,
   selectUserByUsername,
 };
