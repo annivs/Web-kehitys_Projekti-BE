@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
 /**
- * @api {middleware} authenticateToken Tarkistaa JWT-tokenin
+ * @api {middleware} authenticateToken Verifies JWT token
  * @apiGroup Auth
  * @apiHeader {String} Authorization Bearer [token]
- * @apiError 401 Token puuttuu
- * @apiError 403 Token virheellinen
+ * @apiError 401 Token is missing
+ * @apiError 403 Invalid token
  */
 const authenticateToken = (req, res, next) => {
   console.log('authenticateToken', req.headers);

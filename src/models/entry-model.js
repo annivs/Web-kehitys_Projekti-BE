@@ -1,16 +1,16 @@
 import promisePool from '../utils/database.js';
 
 /**
- * @api {function} insertEntry Lisää päiväkirjamerkinnän
+ * @api {function} insertEntry Add a diary entry
  * @apiGroup Entries
- * @apiDescription Tämä funktio lisää uuden päiväkirjamerkinnän tietokantaan käyttäjän syöttämillä tiedoilla.
- * @apiBody {Number} user_id Käyttäjän ID, johon merkintä liittyy
- * @apiBody {String} entry_date Päivämäärä, jolloin merkintä on tehty (formaatti: YYYY-MM-DD)
- * @apiBody {String} mood Käyttäjän mieliala päiväkirjassa
- * @apiBody {Number} sleep_hours Unetunnit päiväkirjassa
- * @apiBody {String} notes Merkinnän muistiinpanot
- * @apiError 500 Tietokantavirhe
- * @apiSuccess {Number} insertId Tietokannan palauttama ID lisätylle merkinnälle
+ * @apiDescription This function adds a new diary entry to the database with the user's input data.
+ * @apiBody {Number} user_id The ID of the user to whom the entry belongs
+ * @apiBody {String} entry_date The date the entry was created (format: YYYY-MM-DD)
+ * @apiBody {String} mood The user's mood in the diary entry
+ * @apiBody {Number} sleep_hours The number of sleep hours recorded in the diary
+ * @apiBody {String} notes Notes for the diary entry
+ * @apiError 500 Database error
+ * @apiSuccess {Number} insertId The ID of the newly added entry returned by the database
  */
 
 const insertEntry = async (entry) => {
@@ -29,17 +29,17 @@ const insertEntry = async (entry) => {
 };
 
 /**
- * @api {function} selectEntriesByUserId Hakee käyttäjän merkinnät
+ * @api {function} selectEntriesByUserId Fetch user's diary entries
  * @apiGroup Entries
- * @apiDescription Tämä funktio hakee kaikki päiväkirjamerkinnät tietyn käyttäjän ID:n perusteella.
- * @apiParam {Number} userId Käyttäjän ID, jonka merkinnät haetaan
- * @apiSuccess {Object[]} entries Lista merkinnöistä
- * @apiSuccess {Number} entries.user_id Käyttäjän ID, johon merkintä liittyy
- * @apiSuccess {String} entries.entry_date Päivämäärä, jolloin merkintä on tehty
- * @apiSuccess {String} entries.mood Käyttäjän mieliala päiväkirjassa
- * @apiSuccess {Number} entries.sleep_hours Unetunnit
- * @apiSuccess {String} entries.notes Merkinnän muistiinpanot
- * @apiError 500 Tietokantavirhe
+ * @apiDescription This function retrieves all diary entries based on a specific user ID.
+ * @apiParam {Number} userId The ID of the user whose entries are being retrieved
+ * @apiSuccess {Object[]} entries List of diary entries
+ * @apiSuccess {Number} entries.user_id The ID of the user to whom the entry belongs
+ * @apiSuccess {String} entries.entry_date The date the entry was created
+ * @apiSuccess {String} entries.mood The user's mood in the diary entry
+ * @apiSuccess {Number} entries.sleep_hours Number of sleep hours recorded
+ * @apiSuccess {String} entries.notes Notes for the diary entry
+ * @apiError 500 Database error
  */
 
 
@@ -58,14 +58,15 @@ const selectEntriesByUserId = async (userId) => {
 };
 
 /**
- * @api {function} deleteEntry Poistaa päiväkirjamerkinnän
+ * @api {function} deleteEntry Delete a diary entry
  * @apiGroup Entries
- * @apiDescription Tämä funktio poistaa päiväkirjamerkinnän tietokannasta merkinnän ID:n perusteella.
- * @apiParam {Number} entryId Merkinnän ID, joka poistetaan
- * @apiError 500 Tietokantavirhe
- * @apiError 404 Merkintää ei löytynyt
- * @apiSuccess {String} message Viesti, että merkintä on poistettu
+ * @apiDescription This function deletes a diary entry from the database based on the entry ID.
+ * @apiParam {Number} entryId The ID of the entry to be deleted
+ * @apiError 500 Database error
+ * @apiError 404 Entry not found
+ * @apiSuccess {String} message Message confirming that the entry has been deleted
  */
+
 const deleteEntry = async (entryId) => {
   try {
     // Poistetaan merkintä tietokannasta ID:n perusteella
@@ -90,16 +91,16 @@ const deleteEntry = async (entryId) => {
 };
 
 /**
- * @api {function} updateEntry Päivittää päiväkirjamerkinnän
+ * @api {function} updateEntry Update a diary entry
  * @apiGroup Entries
- * @apiDescription Tämä funktio päivittää päiväkirjamerkinnän tietokannassa merkinnän ID:n ja käyttäjän syöttämien tietojen perusteella.
- * @apiParam {Number} entryId Merkinnän ID, joka päivitetään
- * @apiBody {String} mood Käyttäjän mieliala päiväkirjassa
- * @apiBody {Number} sleep_hours Unetunnit
- * @apiBody {String} notes Merkinnän muistiinpanot
- * @apiError 500 Tietokantavirhe
- * @apiError 404 Merkintää ei löytynyt
- * @apiSuccess {String} message Viesti, että merkintä on päivitetty
+ * @apiDescription This function updates a diary entry in the database based on the entry ID and the user's input data.
+ * @apiParam {Number} entryId The ID of the entry to be updated
+ * @apiBody {String} mood The user's mood in the diary entry
+ * @apiBody {Number} sleep_hours Number of sleep hours recorded
+ * @apiBody {String} notes Notes for the diary entry
+ * @apiError 500 Database error
+ * @apiError 404 Entry not found
+ * @apiSuccess {String} message Message confirming that the entry has been updated
  */
 
 const updateEntry = async (entryId, mood, sleep_hours, notes) => {
