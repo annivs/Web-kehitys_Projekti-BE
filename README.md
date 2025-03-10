@@ -1,5 +1,11 @@
 # 📖 MyHealth backend
 
+## Yleiskuvaus sovelluksesta
+
+MyHealth on päiväkirjamainen sovellus, joka mahdollistaa käyttäjän päivittäisten merkintöjen tallentamisen,
+muokkaamisen ja tarvittaessa poistamisen. Sovellus hyödyntää Node.js ja Express.js - pohjaista REST API:a, joka kommunikoi MySql- tietokannan kanssa. 
+Käyttäjäautentikointi on toteutettu JWT-Tokenin avulla.
+
 ## Autentikointi ja kirjautuminen
 
 ### **Käyttäjän autentikointi**
@@ -21,10 +27,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5c...
 
 ## Suojatut reitit
 
-| **Endpoint**              | **Kuvaus**                 | **Oikeudet**    |
-|---------------------------|----------------------------|-----------------|
-|   POST /api/entries       | Lisää uusi merkintä        | Vain käyttäjä   |
-|   GET /api/entries        | Hae kaikki omat merkinnät  | Vain käyttäjä   |
+| **Endpoint**               | **Kuvaus**                 | **Oikeudet**    |
+|----------------------------|----------------------------|-----------------|
+|   POST /api/entries        | Lisää uusi merkintä        | Vain käyttäjä   |
+|   GET /api/entries         | Hae kaikki omat merkinnät  | Vain käyttäjä   |
+|   PUT /api/entries/:id     | Muokkaa omaa merkintää     | Vain käyttäjä   |
+|   DELETE /api/entries/:id  | Hae kaikki omat merkinnät  | Vain käyttäjä   |
 
 ---
 
