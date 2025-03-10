@@ -1,4 +1,4 @@
-import {insertEntry, selectEntriesByUserId, deleteEntry} from '../models/entry-model.js';
+import {insertEntry, selectEntriesByUserId, deleteEntry, updateEntry} from '../models/entry-model.js';
 
 const postEntry = async (req, res, next) => {
   // user_id, entry_date, mood,sleep_hours, notes
@@ -42,4 +42,20 @@ const deleteEntryController = async (req, res) => {
   }
 };
 
-export {postEntry, getEntries, deleteEntryController};
+const updateEntryController = async (req, res) => {
+  const entryId = req.params.id;  // Merkinnän ID
+  const { mood, sleep_hours, notes } = req.body;  // Uudet tiedot
+
+  try {
+    const result = await updateEntry(entryId, mood, sleep_hours, notes);  // Päivitetään merkintä
+    res.json({ message: result.message });  // Palautetaan viesti
+  } catch (error) {
+    if (error.message === 'Merkintää ei löytynyt') {
+      res.status(404).json({ message: 'Päiväkirjamerkintää ei löytynyt.' });
+    } else {
+      res.status(500).json({ message: 'Tietokantavirhe' });
+    }
+  }
+};
+
+export {postEntry, getEntries, deleteEntryController, updateEntryController};

@@ -1,5 +1,5 @@
 import express from 'express';
-import {getEntries, postEntry, deleteEntryController} from '../controllers/entry-controller.js';
+import {getEntries, postEntry, deleteEntryController, updateEntryController} from '../controllers/entry-controller.js';
 import {authenticateToken} from '../middlewares/authentication.js';
 import {body} from 'express-validator';
 import {validationErrorHandler} from '../middlewares/error-handler.js';
@@ -43,6 +43,12 @@ entryRouter
  
 entryRouter
   .route('/:id')
-  .delete(authenticateToken, deleteEntryController);
+  .delete(authenticateToken, deleteEntryController)
+  .put(authenticateToken, 
+    body('mood').trim().notEmpty().isLength({min: 3, max: 25}).escape(),
+    body('sleep_hours').isInt({min: 0, max: 24}),
+    body('notes').trim().escape(),
+    validationErrorHandler,
+    updateEntryController); 
 
 export default entryRouter;

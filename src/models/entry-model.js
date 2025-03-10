@@ -89,4 +89,38 @@ const deleteEntry = async (entryId) => {
   }
 };
 
-export {insertEntry, selectEntriesByUserId, deleteEntry};
+/**
+ * @api {function} updateEntry Päivittää päiväkirjamerkinnän
+ * @apiGroup Entries
+ * @apiDescription Tämä funktio päivittää päiväkirjamerkinnän tietokannassa merkinnän ID:n ja käyttäjän syöttämien tietojen perusteella.
+ * @apiParam {Number} entryId Merkinnän ID, joka päivitetään
+ * @apiBody {String} mood Käyttäjän mieliala päiväkirjassa
+ * @apiBody {Number} sleep_hours Unetunnit
+ * @apiBody {String} notes Merkinnän muistiinpanot
+ * @apiError 500 Tietokantavirhe
+ * @apiError 404 Merkintää ei löytynyt
+ * @apiSuccess {String} message Viesti, että merkintä on päivitetty
+ */
+
+const updateEntry = async (entryId, mood, sleep_hours, notes) => {
+  try {
+    const [result] = await promisePool.query(
+      'UPDATE DiaryEntries SET mood = ?, sleep_hours = ?, notes = ? WHERE entry_id = ?',
+      [mood, sleep_hours, notes, entryId]
+    );
+
+    if (result.affectedRows === 0) {
+      throw new Error('Merkintää ei löytynyt');
+    }
+
+    console.log('updateEntry', result);
+    return { message: 'Merkintä päivitetty onnistuneesti' };
+  } catch (error) {
+    console.error(error);
+    if (error.message === 'Merkintää ei löytynyt') {
+      throw new Error('Merkintää ei löytynyt');
+    }
+    throw new Error('Tietokantavirhe');
+  }
+};
+export {insertEntry, selectEntriesByUserId, deleteEntry, updateEntry};
